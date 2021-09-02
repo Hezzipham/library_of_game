@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Add A New Book{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-sm-12 col-md-8 lh-lg">
+          <div class="card">
+            <img src="static/images/giphy.gif" class="card-img" alt="donate">
+              <div class="card-img-overlay">
+                 <h5 class="card-title">Donate to</h5>
+                 <p class="card-text">Account Name: Nguyen Quoc Tuan<br>Account Number: 19036648041018<br>Bank info: Techcombank Hanoi</p>
+                </div>
+          </div>
+
+      </div>
+
+       <div class="col-sm-12 col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="center">Donate A Book</h2>
+            </div>
+            <div class="card-body">
+                {{ wtf.quick_form(form, button_map ={'submit':'success'}) }}
+            </div>
+        </div>
+       </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+.zoom {
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  z-index: 100;
+  transform: scale(2); /* (250% zoom)*/
+}

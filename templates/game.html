@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Games Library{% endblock %}
+
+{% block content %}
+<div class="container  mt-5 ">
+    <h1>Vietnamese Folk Game</h1>
+    <div class="d-flex flex-wrap gap-3 justify-content-evenly">
+    {% for i in range(num) %}
+        <div class="card" style="width: 18rem;">
+  <img src="static/images/{{games[i][1]}}" class="card-img-top zoom" alt="...">
+  <div class="card-body">
+    <h3 class="card-text">{{games[i][0]}}</h3>
+  </div>
+</div>
+    {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

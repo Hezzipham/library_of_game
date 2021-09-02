@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Library{% endblock %}
+
+{% block content %}
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+          <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active ">
+            <img class="first-slide img-fluid" src="static/images/about.jpg" alt="First slide">
+            <div class="container">
+              <div style="text-shadow: black 1px 0 10px;" class="carousel-caption text-left">
+                <h1>TVTC - Library of Games</h1>
+                <h3>Bring back the joyful life to children,<br> no matter where they live!</h3>
+                <p><a class="btn btn-lg btn-success" href="#event" role="button">See Our Event</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container marketing mt-5 text-center">
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="static/images/team.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>Organization</h2>
+            <p>We are a non-profit organization, our team members are volunteers of all ages, we introduce folk games to children, no matter where they live. We make sure nobody misses out on their childhood!</p>
+            <p><a class="btn btn-secondary" href="{{ url_for('contact') }}" role="button">Contact »</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="static/images/event.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>Operation</h2>
+            <p>Games can improve kids' hand–eye coordination,problem-solving skills, and communication skills. That's the reason we create free game events regularly for children in Vietnam. Everyone is welcome to join the team to spread love and laugh.</p>
+            <p><a class="btn btn-secondary" href="{{ url_for('game') }}" role="button">Games »</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <img class="rounded-circle" src="static/images/donate.PNG" alt="Generic placeholder image" width="140" height="140">
+            <h2>Fundraising</h2>
+            <p>We collect money through our offline fundraising events and online donation. Part of the money is for operating cost and the other part come back to the game events.</p>
+            <p><a class="btn btn-secondary" href="{{ url_for('donate') }}" role="button">Donate »</a></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+
+        <!-- START THE FEATURETTES -->
+<h1 id="event" class="mt-5">Our Latest Event</h1>
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Tết Ấm Yêu Thương 2021 <span class="text-muted">- Lovely Cozy Tet Holiday</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 500px; height: 300px;" src="static/images/feature3.png" >
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Hà Nội Có "X" <span class="text-muted"> - Useful Day.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" alt="500x500" src="static/images/feature2.png" data-holder-rendered="true" style="width: 500px; height: 300px;">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Hồi Ức Tuổi Thơ <span class="text-muted">- Childhood Memories.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto"  alt="500x500" src="static/images/feature1.png" style="width: 500px; height: 300px;">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+{% endblock %}
+    
