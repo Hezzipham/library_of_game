@@ -20,9 +20,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BEfBA6O6dobnzWlSihBXox7C0sKR6b'
 Bootstrap(app)
 
+uploads_dir = os.path.join(app.instance_path, 'uploads')
+os.makedirs(uploads_dir, exists_ok=True)
+
 # db = sqlite3.connect("books-collection.db")
 # cursor = db.cursor()
 # cursor.execute("CREATE TABLE books (id INTEGER PRIMARY KEY, title varchar(250) NOT NULL UNIQUE, author varchar(250) NOT NULL, rating FLOAT NOT NULL, file varchar(250) NOT NULL)")
+
+
 all_books = []
 
 year = datetime.now().year
@@ -67,7 +72,10 @@ def donate():
         author = form.book_author.data
         rating = form.rating.data
         file = form.book_file.data
-        all_books.append([book_name, author, rating, file])
+        file.save(os.path.join(uploads_dir, secure_filename(file.filename)))
+        file_path = "x"
+        # save each "charts" file
+        all_books.append([book_name, author, rating, file_path])
         print(all_books)
         return redirect(url_for('book'))
 
