@@ -3,7 +3,8 @@ from flask_bootstrap import Bootstrap
 from allform import BookForm, ContactForm
 from datetime import datetime
 import os
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
 import sqlite3
 
 
@@ -20,8 +21,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BEfBA6O6dobnzWlSihBXox7C0sKR6b'
 Bootstrap(app)
 
-uploads_dir = os.path.join(app.instance_path, 'uploads')
-os.makedirs(uploads_dir, exists_ok=True)
+uploads_dir = os.path.join(app.static_folder, 'book_uploads')
+os.makedirs(uploads_dir, exist_ok=True)
 
 # db = sqlite3.connect("books-collection.db")
 # cursor = db.cursor()
@@ -73,10 +74,11 @@ def donate():
         rating = form.rating.data
         file = form.book_file.data
         file.save(os.path.join(uploads_dir, secure_filename(file.filename)))
-        file_path = "x"
+        file_name = file.filename
+        file_path = f"static/book_uploads/{file_name}"
         # save each "charts" file
-        all_books.append([book_name, author, rating, file_path])
-        print(all_books)
+        all_books.append([book_name, author, rating, file_path, file_name])
+        print(file_path)
         return redirect(url_for('book'))
 
     return render_template("donate.html", form=form)
