@@ -5,34 +5,29 @@
 {% block content %}
 
 <div class="container mt-5">
+  <h1 class="text-center">Book Library</h1>
+  {% if not books %}
+  <h3 class="text-center">Library is empty</h3>
+  {% endif %}
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Book</th>
+      <th scope="col">Author</th>
+      <th scope="col">Ratting</th>
+      <th scope="col">Download</th>
     </tr>
   </thead>
   <tbody>
+  {% for book in books %}
+
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{book[0]}}</th>
+      <td>{{book[1]}}</td>
+      <td>{{book[2]}}</td>
+      <td>{{book[3]}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  {% endfor %}
   </tbody>
 </table>
 </div>
