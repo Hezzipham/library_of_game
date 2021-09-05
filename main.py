@@ -1,11 +1,11 @@
-from flask import Flask, render_template,redirect, url_for
+from flask import Flask
+from flask import render_template, redirect, url_for, request
+from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from allform import BookForm, ContactForm
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
-from werkzeug.datastructures import  FileStorage
-import sqlite3
 
 
 # # Quiz:
@@ -18,20 +18,35 @@ import sqlite3
 
 
 app = Flask(__name__)
+# Secret Key
 app.config['SECRET_KEY'] = '8BEfBA6O6dobnzWlSihBXox7C0sKR6b'
+# Add Database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books_up.db'
+#Optional: But it will silence the deprecation warning in the console.
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Initialize Database
+db = SQLAlchemy(app)
 Bootstrap(app)
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), nullable=False)
+    author = db.Column(db.String(250), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+    file_path = db.Column(db.String(1550), nullable=False)
+
+
+db.create_all()
+db.session.commit()
 
 uploads_dir = os.path.join(app.static_folder, 'book_uploads')
 os.makedirs(uploads_dir, exist_ok=True)
 
-# db = sqlite3.connect("books-collection.db")
-# cursor = db.cursor()
-# cursor.execute("CREATE TABLE books (id INTEGER PRIMARY KEY, title varchar(250) NOT NULL UNIQUE, author varchar(250) NOT NULL, rating FLOAT NOT NULL, file varchar(250) NOT NULL)")
 
 
-all_books = []
 
 year = datetime.now().year
+
 
 @app.route('/')
 def home():
@@ -39,7 +54,6 @@ def home():
 
 
 @app.route('/game')
-
 def game():
     with open('game.txt', 'r') as data:
         games = data.read().split('\n')
@@ -48,41 +62,54 @@ def game():
 
     return render_template("game.html", games=g_list, num=g_num)
 
+
 @app.route('/book')
 def book():
-    return render_template("book.html", books = all_books)
+    all_books = db.session.query(Book).all()
+    return render_template("book.html", books=all_books)
 
 
 @app.route('/contact')
 def contact():
     form = ContactForm()
-    return render_template("contact.html", form =form)
+    return render_template("contact.html", form=form)
+
 
 @app.route('/learning')
 def learning():
     return render_template("learning.html")
 
 
-
-
 @app.route("/donate", methods=['GET', 'POST'])
 def donate():
     form = BookForm()
     if form.validate_on_submit():
-        book_name = form.book_name.data
-        author = form.book_author.data
-        rating = form.rating.data
         file = form.book_file.data
         file.save(os.path.join(uploads_dir, secure_filename(file.filename)))
         file_name = file.filename
-        file_path = f"static/book_uploads/{file_name}"
-        # save each "charts" file
-        all_books.append([book_name, author, rating, file_path, file_name])
-        print(file_path)
+        file_link = "/static/book_uploads/"+ file_name
+        print(file_link)
+        new_book = Book(
+        title = form.book_name.data,
+        author = form.book_author.data,
+        rating = form.rating.data,
+        file_path = file_link )
+        db.session.add(new_book)
+        db.session.commit()
+
         return redirect(url_for('book'))
 
     return render_template("donate.html", form=form)
 
+@app.route("/delete")
+def delete():
+    book_id = request.args.get('id')
+
+    # DELETE A RECORD BY ID
+    book_to_delete = Book.query.get(book_id)
+    db.session.delete(book_to_delete)
+    db.session.commit()
+    return redirect(url_for('book'))
 
 
 if __name__ == "__main__":

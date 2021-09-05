@@ -16,16 +16,18 @@
       <th scope="col">Author</th>
       <th scope="col">Ratting</th>
       <th scope="col">Download</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
   {% for book in books %}
 
     <tr>
-      <th scope="row">{{book[0]}}</th>
-      <td>{{book[1]}}</td>
-      <td>{{book[2]}}</td>
-      <td><a href="{{book[3]}}" download="{{book[4]}}"><img src="{{book[3]}}">Download Here</a></td>
+      <th scope="row">{{book.title}}</th>
+      <td>{{book.author}}</td>
+      <td>{{book.rating}}/10</td>
+      <td><a href="{{ book.file_path }}" download>Download Here</a></td>
+      <td><a href="{{ url_for('delete', id=book.id) }}">Delete</a></td>
     </tr>
   {% endfor %}
   </tbody>
