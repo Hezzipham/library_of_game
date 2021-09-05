@@ -1,12 +1,12 @@
-Ném Lon, nemlon.jpg
-Pháo Đất, phao.jpg
-Kéo Co, keoco.jpg
-Ô Ăn Quan, anquan.jpg
-Đi Cà Kheo, brave.jpg
-Rồng Rắn Lên Mây, rongran.jpg
-Đống Rơm Làng Quê, straw.jpg
-Viết Câu Đối, mask.jpg
-Kéo Co, Dad.jpg
-Đánh Chuyền(Banh Đũa), chuyen.jpg
-Kem Mút, kem.jpg
-Nhảy Dây, nhayday.jpg
+Ném Lon, https://live.staticflickr.com/65535/51428269704_51d898ebe2_b.jpg
+Pháo Đất, https://live.staticflickr.com/65535/51427756733_900ebc30e3_b.jpg
+Kéo Co, https://live.staticflickr.com/65535/51426761172_4c5030c382_b.jpg
+Ô Ăn Quan, https://live.staticflickr.com/65535/51428490230_88a0e01d9c_b.jpg
+Đi Cà Kheo, https://live.staticflickr.com/65535/51428268394_1bdc6e0491_b.jpg
+Rồng Rắn Lên Mây, https://live.staticflickr.com/65535/51428492275_e5cdd1b864_b.jpg
+Đống Rơm Làng Quê, https://live.staticflickr.com/65535/51428490535_a066e8e6ae_b.jpg
+Viết Câu Đối, https://live.staticflickr.com/65535/51428267399_efa311092c_b.jpg
+Kéo Co, https://live.staticflickr.com/65535/51426758827_c26c1992d7_b.jpg
+Đánh Chuyền(Banh Đũa), https://live.staticflickr.com/65535/51428489495_d375ba4ba3_b.jpg
+Kem Mút, https://live.staticflickr.com/65535/51428267689_3917aa828f_b.jpg
+Nhảy Dây, https://live.staticflickr.com/65535/51428266949_eedde87eb0_b.jpg
