@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Books Library{% endblock %}
 
@@ -9,6 +10,8 @@
   {% if not books %}
   <h3 class="text-center">Library is empty</h3>
   {% endif %}
+<div class="row">
+    <div class="col-sm-12 col-md-9 lh-lg">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -27,10 +30,27 @@
       <td>{{book.author}}</td>
       <td>{{book.rating}}/10</td>
       <td><a href="{{ book.file_path }}" download>Download Here</a></td>
+        {% if is_authenticated %}
       <td><a href="{{ url_for('delete', id=book.id) }}">Delete</a></td>
+        {% else %}
+      <td><a href="#login">Delete</a></td>
+        {% endif %}
+
     </tr>
   {% endfor %}
   </tbody>
 </table>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        {% if is_authenticated %}
+        <h2 class="center">Welcome Admin</h2>
+        {% else %}
+             <h4 class="center">Admin Login</h4>
+            {{ wtf.quick_form(form, horizontal_columns=('lg', 2, 10), button_map ={'submit':'success'}, novalidate=True) }}
+            <br>
+            <p class="text-danger">{{ msg }}</p>
+        {% endif %}
+    </div>
+</div>
 </div>
 {% endblock %}

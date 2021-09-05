@@ -2,11 +2,10 @@ from flask import Flask
 from flask import render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from allform import BookForm, ContactForm
+from allform import BookForm, ContactForm, LogInForm
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
-
 
 # # Quiz:
 # import requests
@@ -27,6 +26,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Initialize Database
 db = SQLAlchemy(app)
 Bootstrap(app)
+
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -63,16 +63,28 @@ def game():
     return render_template("game.html", games=g_list, num=g_num)
 
 
-@app.route('/book')
+@app.route('/book', methods=(["POST", "GET"]))
 def book():
+    form = LogInForm()
     all_books = db.session.query(Book).all()
-    return render_template("book.html", books=all_books)
+    msg = "Admin Must Login To Edit Book Library"
+    is_authenticated = False
+    if request.method == 'POST' and form.validate_on_submit():
+        if form.username.data == "admin" and form.password.data == "12345678":
+            is_authenticated = True
+        else:
+            msg = "Wrong password. Please try again."
+    return render_template("book.html", books=all_books, msg=msg, form=form, is_authenticated = is_authenticated)
 
 
-@app.route('/contact')
+@app.route('/contact', methods=(["POST", "GET"]))
 def contact():
+    sent = False
     form = ContactForm()
-    return render_template("contact.html", form=form)
+    if request.method=="POST":
+        sent = True
+        return render_template("contact.html", sent = sent)
+    return render_template("contact.html", sent = sent)
 
 
 @app.route('/learning')
@@ -85,8 +97,8 @@ def donate():
     form = BookForm()
     if form.validate_on_submit():
         file = form.book_file.data
-        file.save(os.path.join(uploads_dir, secure_filename(file.filename)))
-        file_name = file.filename
+        file_name = (file.filename).replace("_","").replace(" ", "")
+        file.save(os.path.join(uploads_dir, secure_filename(file_name)))
         file_link = "/static/book_uploads/"+ file_name
         print(file_link)
         new_book = Book(
@@ -101,7 +113,8 @@ def donate():
 
     return render_template("donate.html", form=form)
 
-@app.route("/delete")
+
+@app.route('/delete')
 def delete():
     book_id = request.args.get('id')
 
@@ -110,6 +123,7 @@ def delete():
     db.session.delete(book_to_delete)
     db.session.commit()
     return redirect(url_for('book'))
+
 
 
 if __name__ == "__main__":

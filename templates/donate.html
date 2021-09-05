@@ -24,7 +24,7 @@
                 <h2 class="center">Donate A Book</h2>
             </div>
             <div class="card-body">
-                {{ wtf.quick_form(form, button_map ={'submit':'success'}) }}
+                {{ wtf.quick_form(form, button_map ={'submit':'success'}, novalidate=True) }}
             </div>
         </div>
        </div>

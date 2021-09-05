@@ -17,13 +17,13 @@
 
 
       <div class="col-md-5 g-3 col-sm-12">
-        <form>
+        <form id="email_sub" class="form" action="#" method="POST">
           <h5>Subscribe to our newsletter</h5>
-          <p>Monthly digest of whats new and exciting from us.</p>
+          <p>Monthly digest of what's new and exciting from us.</p>
           <div class="d-flex w-100 gap-3 flex-wrap">
             <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input style="max-width:300px" id="newsletter1" type="text" class="form-control" placeholder="Email address">
-            <button class="btn btn-success" type="button">Subscribe</button>
+            <input style="max-width:300px" id="newsletter1" type="email" class="form-control" placeholder="Email address" required>
+            <button  class="btn btn-success" type="submit">Subscribe</button>
           </div>
         </form>
         <div class="d-flex mt-3 gap-2 flex-wrap">
@@ -41,5 +41,6 @@
     <div class="d-flex justify-content-between py-4 my-4 border-top">
       <p>© 2021 Library of Games. All rights reserved.</p>
     </div>
+
   </footer>
 </div>

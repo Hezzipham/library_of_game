@@ -8,8 +8,26 @@
     <div class="row">
         <div class="col-sm-12 col-md-3"></div>
         <div class="col-sm-12 col-md-6 lh-lg">
-             <h2 class="center">Contact Us</h2>
-            {{ wtf.quick_form(form, button_map ={'submit':'success'}) }}
+
+            <h2 class="center">Contact Us</h2>
+                <form class="form" action="{{ url_for('contact') }}" method="post" enctype="multipart/form-data" id="contactForm">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="First And Last Name" name="name" required>
+                </div>
+                <div cclass="mb-3">
+                    <label class="form-label" for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="message">Message:</label>
+                    <textarea class="form-control" rows="2" id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success mb-3" name="submit">Send</button>
+            </form>
+            {% if sent == True %}
+             <p class="center">You message successfully sent!</p>
+            {% endif %}
         </div>
         <div class="col-sm-12 col-md-3"></div>
     </div>

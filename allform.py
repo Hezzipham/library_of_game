@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
-from wtforms import StringField, SubmitField, IntegerField, TextAreaField
-from wtforms.validators import InputRequired, Email, NumberRange
+from wtforms import StringField, SubmitField, IntegerField, TextAreaField, PasswordField
+from wtforms.validators import InputRequired, Email, NumberRange, Length, DataRequired
 
 class BookForm(FlaskForm):
     book_name = StringField('Book Name', validators=[InputRequired()])
@@ -16,3 +16,9 @@ class ContactForm(FlaskForm):
     location = StringField('State, Country', validators=[InputRequired()])
     message = TextAreaField('Message', validators=[InputRequired()])
     submit = SubmitField('Send')
+
+class LogInForm(FlaskForm):
+    username = StringField('username', validators=[Length(min=5, max=120)])
+    password = PasswordField('password', validators=[DataRequired()])
+    submit = SubmitField('Log In')
+    
